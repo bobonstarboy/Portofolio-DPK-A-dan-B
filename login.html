@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css" />
+    <title>Login Page</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="kElOmpOK 1 (1).png" alt="Zenith Logo">
+            <span>Zenith</span>
+        </div>
+        <nav class="nav">
+            <li><a href="#">Mac</a></li>
+            <li><a href="#">iPad</a></li>
+            <li><a href="#">iPhone</a></li>
+            <li><a href="#">iWatch</a></li>
+            <li><a href="login.css">Login</a></li>
+        </nav>
+    </header>
+  
+    <div class="container">
+        <form id="loginform">
+            <h2>Login</h2>
+            <input type="email" placeholder="Email Address" id="email" required>
+            <input type="password" placeholder="Password" id="password" required>
+            <button class="login-btn" type="submit">Login</button>
+            <p id="error-message" style="color:red; display:none;">Email atau Password Salah</p>
+        </form>
+    </div>
+
+    <script>
+        // Simpan email dan password yang benar di Local Storage
+        localStorage.setItem("correctEmail", "ooo@gmail.com");
+        localStorage.setItem("correctPassword", "123");
+
+        let attemptCount = 0;
+
+        document.getElementById("loginform").addEventListener("submit", function(event) {
+            event.preventDefault();
+        
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            // Ambil email dan password dari Local Storage
+            const correctEmail = localStorage.getItem("correctEmail");
+            const correctPassword = localStorage.getItem("correctPassword");
+
+            if (email === correctEmail && password === correctPassword) {
+                window.location.href = "portofolio-zenith.html"; // Redirect to the login success page
+            } else {
+                attemptCount++;
+                document.getElementById("error-message").style.display = "block"; // Show error message
+                
+                // Optional: Limit the number of attempts
+                if (attemptCount >= 3) {
+                    alert("Terlalu banyak percobaan. Silakan coba lagi nanti.");
+                    document.getElementById("loginform").reset(); // Reset the form
+                    attemptCount = 0; // Reset attempt count
+                }
+            }
+        });
+    </script>
+</body>
+</html>
